@@ -1,16 +1,20 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css';
 import RegisterForm from './components/RegisterForm/RegisterForm';
+import DomainScanner from './components/DomenScan/DomenScan';
 
 function App() {
+  const [isRegistered, setIsRegistered] = useState(false);
  
   return (
     <>
-      <RegisterForm />
+      {!isRegistered ? (
+          <RegisterForm onSuccess={() => setIsRegistered(true)} />
+        ) : (
+        <DomainScanner />
+      )}
     </>
-  )
+  );
 }
 
 export default App

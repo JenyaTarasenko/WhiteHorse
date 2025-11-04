@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 
-function RegisterForm() {
+function RegisterForm({onSuccess}) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [domain, setDomain] = useState("");
@@ -28,7 +28,11 @@ function RegisterForm() {
         setPassword("");
         setDomain("");
            // 🔹 очищаем сообщение через 3 секунды
-        setTimeout(() => setMessage(""), 3000);
+        setTimeout(() => {
+        setMessage("");
+        onSuccess(); // 🔥 ВАЖНО: именно это переключает компонент!
+        }, 1000);
+        
       }
     } catch (err) {
       setError(err.response?.data?.detail || "Ошибка при регистрации");
